@@ -74,7 +74,7 @@ ol.steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 <div class="wrap">
   <header>
     <h1>Clio's Spelling Desk</h1>
-    <p>Επτά λέξεις για το αυριανό διαγώνισμα. Κάνε τα παιχνίδια 1 έως 5 με τη σειρά και τέλος το τελικό τεστ.</p>
+    <p>Έντεκα λέξεις για το διαγώνισμα. Κάνε τα παιχνίδια 1 έως 5 με τη σειρά και τέλος το τελικό τεστ.</p>
   </header>
 
   <div class="words" id="words"></div>
@@ -88,7 +88,7 @@ ol.steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
     <h2 style="color:var(--ink)">Για τον γονιό</h2>
     <div><b>Απόψε (15 λεπτά):</b> παιχνίδια 1 έως 5 με τη σειρά. Στο 3 γράφει σε χαρτί, όχι μόνο στην οθόνη: το χέρι θυμάται.</div>
     <div><b>Πριν τον ύπνο:</b> μία υπαγόρευση (παιχνίδι 5). Ο ύπνος «κλειδώνει» ό,τι εξασκήθηκε τελευταίο.</div>
-    <div><b>Τελικό τεστ (6):</b> εικόνα + ελληνική λέξη, γράφει την αγγλική χωρίς ήχο και χωρίς βοήθεια. Βαθμός και διορθώσεις στο τέλος. Στόχος: 7/7.</div>
+    <div><b>Τελικό τεστ (6):</b> εικόνα + ελληνική λέξη, γράφει την αγγλική χωρίς ήχο και χωρίς βοήθεια. Βαθμός και διορθώσεις στο τέλος. Στόχος: 11/11.</div>
     <div><b>Αύριο το πρωί (5 λεπτά):</b> μόνο το τελικό τεστ. Αν κάποια λέξη βγει λάθος, ξανά το 3 για εκείνη.</div>
     <div><b>Γιατί δουλεύει:</b> χωρίζει τη λέξη σε κομμάτια, βλέπει πού είναι η «παγίδα», τη γράφει από μνήμης (όχι αντιγραφή), ελέγχει μόνη της, και επαναλαμβάνει με κενό χρόνου.</div>
   </section>
@@ -116,7 +116,19 @@ const WORDS = [
     icon:'<svg viewBox="0 0 64 64"><path d="M6 32a26 22 0 0 1 52 0c-4-3-9-3-13 0c-4-3-9-3-13 0c-4-3-9-3-13 0c-4-3-9-3-13 0z" fill="#8a5cf6"/><path d="M32 10v40a6 6 0 0 1-12 0" fill="none" stroke="#1d2b3a" stroke-width="3" stroke-linecap="round"/></svg>' },
   { w:"rubber", gr:"γόμα", chunks:[["rub","b"],["ber","b"]],
     tip:"<b>rub</b> = τρίβω, και η γόμα τρίβει το χαρτί! <b>rub</b> + <b>ber</b>, με <b>διπλό bb</b> στη μέση: ru<b>bb</b>er. Τελειώνει με <b>er</b>, όπως sharpen<b>er</b>.",
-    icon:'<svg viewBox="0 0 64 64"><g transform="rotate(-20 32 32)"><rect x="10" y="22" width="44" height="20" rx="4" fill="#f28b9b"/><rect x="10" y="22" width="18" height="20" rx="4" fill="#2f6fde"/><rect x="24" y="22" width="4" height="20" fill="#2f6fde"/></g></svg>' }
+    icon:'<svg viewBox="0 0 64 64"><g transform="rotate(-20 32 32)"><rect x="10" y="22" width="44" height="20" rx="4" fill="#f28b9b"/><rect x="10" y="22" width="18" height="20" rx="4" fill="#2f6fde"/><rect x="24" y="22" width="4" height="20" fill="#2f6fde"/></g></svg>' },
+  { w:"desk", gr:"θρανίο", chunks:[["d",""],["e","e"],["sk","sk"]],
+    tip:"Τέσσερα γράμματα: <b>d-e-s-k</b>. Τελειώνει με <b>sk</b>, ακούγεται «ντεσκ». Στο <b>desk</b> κάθεσαι και γράφεις!",
+    icon:'<svg viewBox="0 0 64 64"><rect x="6" y="20" width="52" height="8" rx="2" fill="#a0673a"/><rect x="10" y="28" width="6" height="26" fill="#7a4a26"/><rect x="48" y="28" width="6" height="26" fill="#7a4a26"/><rect x="34" y="28" width="14" height="12" fill="#8b5a30"/><rect x="38" y="33" width="6" height="2" rx="1" fill="#f1d3a8"/></svg>' },
+  { w:"ruler", gr:"χάρακας", chunks:[["ru","u"],["ler","er"]],
+    tip:"<b>rule</b> + <b>r</b>. Με <b>u</b> (όχι oo) και τελειώνει με <b>er</b>, όπως rubb<b>er</b> και sharpen<b>er</b>.",
+    icon:'<svg viewBox="0 0 64 64"><g transform="rotate(-25 32 32)"><rect x="4" y="24" width="56" height="16" rx="2" fill="#ffcf3f"/><g stroke="#1d2b3a" stroke-width="2"><line x1="10" y1="24" x2="10" y2="32"/><line x1="17" y1="24" x2="17" y2="29"/><line x1="24" y1="24" x2="24" y2="32"/><line x1="31" y1="24" x2="31" y2="29"/><line x1="38" y1="24" x2="38" y2="32"/><line x1="45" y1="24" x2="45" y2="29"/><line x1="52" y1="24" x2="52" y2="32"/></g></g></svg>' },
+  { w:"pencil case", gr:"κασετίνα", chunks:[["pencil","c"],[" ",""],["case","e"]],
+    tip:"Δύο λέξεις με <b>κενό</b> ανάμεσα: <b>pencil</b> + <b>case</b>. Το pen<b>c</b>il με c, και το cas<b>e</b> τελειώνει με <b>e</b> που δεν ακούγεται, όπως το not<b>e</b>.",
+    icon:'<svg viewBox="0 0 64 64"><rect x="6" y="20" width="52" height="26" rx="12" fill="#2bb3c0"/><path d="M12 22h40" stroke="#1d2b3a" stroke-width="3" stroke-linecap="round"/><rect x="40" y="18" width="8" height="8" rx="2" fill="#ffcf3f"/><g transform="rotate(-15 20 16)"><rect x="12" y="12" width="20" height="5" fill="#ffcf3f"/><polygon points="32,12 38,14.5 32,17" fill="#f1d3a8"/></g></svg>' },
+  { w:"schoolbag", gr:"σχολική τσάντα", chunks:[["sch","ch"],["oo","oo"],["l",""],["bag",""]],
+    tip:"Δύο λέξεις κολλημένες, χωρίς κενό: <b>school</b> + <b>bag</b>. Η παγίδα: το school γράφεται με <b>ch</b> (ακούγεται «σκ») και έχει τα δύο ματάκια <b>oo</b>, όπως το book!",
+    icon:'<svg viewBox="0 0 64 64"><path d="M22 16a10 10 0 0 1 20 0" fill="none" stroke="#1d2b3a" stroke-width="4"/><rect x="12" y="16" width="40" height="42" rx="8" fill="#d6453d"/><rect x="18" y="34" width="28" height="18" rx="4" fill="#a92f29"/><rect x="29" y="32" width="6" height="6" rx="1" fill="#ffcf3f"/></svg>' }
 ];
 
 const LS = "clio-spell-v1";
@@ -323,7 +335,7 @@ function finalResult(){
   else say("Good try Clio! Let's practise and try again.");
 }
 function congrats(r,n){
-  if(r===n) return `<div class="c-title">Συγχαρητήρια, Κλειώ! 🏆</div><div>Τα έγραψες <b>όλα σωστά</b>, χωρίς καμία βοήθεια. Είσαι έτοιμη για το αυριανό διαγώνισμα!</div>`;
+  if(r===n) return `<div class="c-title">Συγχαρητήρια, Κλειώ! 🏆</div><div>Τα έγραψες <b>όλα σωστά</b>, χωρίς καμία βοήθεια. Είσαι έτοιμη για το διαγώνισμα!</div>`;
   if(r===n-1) return `<div class="c-title">Μπράβο, Κλειώ! 🌟</div><div>Μόνο ένα λαθάκι! Γράψε τη λέξη με το κόκκινο 3 φορές στο χαρτί και ξανακάνε το τεστ για το τέλειο ${n}/${n}.</div>`;
   if(r>=Math.ceil(n/2)) return `<div class="c-title">Καλή προσπάθεια! 💪</div><div>Τα μισά και πάνω τα ξέρεις ήδη. Κάνε το «Κοίτα-Κρύψε-Γράψε» για τις κόκκινες λέξεις και ξαναδοκίμασε.</div>`;
   return `<div class="c-title">Πάμε άλλη μια φορά! 🙂</div><div>Ξεκίνα από το παιχνίδι 1 για τις κόκκινες λέξεις. Με λίγη εξάσκηση θα τα πας τέλεια.</div>`;
