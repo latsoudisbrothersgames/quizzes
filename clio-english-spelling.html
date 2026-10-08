@@ -28,13 +28,15 @@ header p{margin:4px 0 0;color:var(--muted)}
 .words{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}
 .wcard{background:var(--paper);border:2px solid var(--line);border-radius:16px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
 .wcard svg{width:64px;height:64px}
-.wcard .w{font-family:var(--hand);font-size:clamp(17px,3.6vw,24px);font-weight:700;word-break:break-word}
+.wcard .w{font-family:var(--hand);font-size:clamp(17px,3vw,22px);font-weight:700;overflow-wrap:break-word}
 .wcard .gr{color:var(--muted);font-size:14px}
 .stars{font-family:var(--display);color:var(--yellow);letter-spacing:2px;min-height:1.2em;-webkit-text-stroke:.5px #b08a10}
 section.panel{background:var(--paper);border:2px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px}
 section.panel h2{font-family:var(--display);font-size:22px;margin:0}
 .tabs{display:flex;flex-wrap:wrap;gap:8px}
 .tab{font:600 15px var(--body);border:2px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+.lessons{margin-top:12px}
+.lessons .tab{font-family:var(--display);font-size:18px;padding:10px 20px}
 .tab[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
 .tip{background:var(--yellow-soft);border-radius:12px;padding:10px 14px}
 .chunks{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
@@ -67,14 +69,55 @@ ol.steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 .big-stars{font-size:clamp(28px,7vw,40px)}
 .congrats{background:var(--green-soft);border-radius:16px;padding:14px 16px;text-align:center;display:flex;flex-direction:column;gap:6px}
 .c-title{font-family:var(--display);font-size:clamp(24px,6vw,32px);font-weight:700;color:var(--green)}
+.hero{border-radius:22px;padding:22px 18px;color:#fff;background:linear-gradient(135deg,#7b4bd6,#d94f8c 55%,#ff9f43);display:flex;flex-direction:column;gap:14px;box-shadow:0 8px 24px rgba(123,75,214,.25)}
+.hero-top{display:flex;align-items:center;gap:16px}
+.hero-ava{flex:none;width:84px;height:84px;border-radius:50%;background:rgba(255,255,255,.18);border:3px solid rgba(255,255,255,.7);display:grid;place-items:center}
+.hero-ava svg{width:64px;height:64px}
+.hero .kicker{font:700 13px var(--body);letter-spacing:.12em;text-transform:uppercase;opacity:.9}
+.hero h1{font-family:var(--display);font-size:clamp(28px,6vw,40px);margin:0;line-height:1.1;text-wrap:balance}
+.hero h1 em{font-style:normal;color:#ffe08a}
+.hero-stats{display:flex;flex-wrap:wrap;gap:10px}
+.hstat{background:rgba(255,255,255,.18);border-radius:14px;padding:8px 14px;min-width:96px;text-align:center}
+.hstat b{display:block;font-family:var(--display);font-size:28px;line-height:1.1}
+.hstat span{font-size:13px;opacity:.95}
+.rank{font-weight:800;background:rgba(0,0,0,.18);border-radius:999px;padding:6px 14px;align-self:flex-start}
+.medals{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px}
+.medal{background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:10px 8px;text-align:center;display:flex;flex-direction:column;gap:3px}
+.medal .mi{font-size:34px;line-height:1.1}
+.medal .mn{font-weight:800;font-size:14px}
+.medal .md{font-size:12px;color:var(--muted);line-height:1.3}
+.medal.locked{opacity:.45;filter:grayscale(.9)}
+.medal.earned{border-color:var(--yellow);background:var(--yellow-soft)}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);font-weight:800;padding:12px 18px;border-radius:14px;z-index:60;box-shadow:0 8px 24px rgba(0,0,0,.25);max-width:calc(100% - 32px);text-align:center}
 .confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
 </style>
 </head><body>
 
 <div class="wrap">
+  <section class="hero" aria-label="Η ηρωίδα">
+    <div class="hero-top">
+      <div class="hero-ava" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M32 4l7.6 17.6L58 23l-14 12.4L48.2 54 32 44.6 15.8 54 20 35.4 6 23l18.4-1.4z" fill="#ffe08a" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg></div>
+      <div>
+        <a class="kicker" href="https://clio-comic.pages.dev/" style="color:#fff;text-decoration:none">← Η σελίδα μου</a>
+        <h1>Κλειώ η <em>Ηρωίδα</em></h1>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><b id="hsMedals">0</b><span>μετάλλια</span></div>
+      <div class="hstat"><b id="hsStars">0</b><span>αστέρια</span></div>
+      <div class="hstat"><b id="hsTests">0</b><span>τέλεια τεστ</span></div>
+    </div>
+    <div class="rank" id="hsRank"></div>
+  </section>
+  <section class="panel">
+    <h2>🏅 Τα μετάλλιά μου</h2>
+    <p class="parent" style="margin:0">Κάθε μετάλλιο κερδίζεται με δουλειά στα παιχνίδια. Αποθηκεύονται μόνα τους σε αυτή τη συσκευή.</p>
+    <div class="medals" id="medals"></div>
+  </section>
   <header>
     <h1>Clio's Spelling Desk</h1>
-    <p>Έντεκα λέξεις για το διαγώνισμα. Κάνε τα παιχνίδια 1 έως 5 με τη σειρά και τέλος το τελικό τεστ.</p>
+    <p id="intro"></p>
+    <div class="tabs lessons" role="tablist" id="lessons"></div>
   </header>
 
   <div class="words" id="words"></div>
@@ -88,14 +131,14 @@ ol.steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
     <h2 style="color:var(--ink)">Για τον γονιό</h2>
     <div><b>Απόψε (15 λεπτά):</b> παιχνίδια 1 έως 5 με τη σειρά. Στο 3 γράφει σε χαρτί, όχι μόνο στην οθόνη: το χέρι θυμάται.</div>
     <div><b>Πριν τον ύπνο:</b> μία υπαγόρευση (παιχνίδι 5). Ο ύπνος «κλειδώνει» ό,τι εξασκήθηκε τελευταίο.</div>
-    <div><b>Τελικό τεστ (6):</b> εικόνα + ελληνική λέξη, γράφει την αγγλική χωρίς ήχο και χωρίς βοήθεια. Βαθμός και διορθώσεις στο τέλος. Στόχος: 11/11.</div>
+    <div><b>Τελικό τεστ (6):</b> εικόνα + ελληνική λέξη, γράφει την αγγλική χωρίς ήχο και χωρίς βοήθεια. Βαθμός και διορθώσεις στο τέλος. Στόχος: όλες σωστές.</div>
     <div><b>Αύριο το πρωί (5 λεπτά):</b> μόνο το τελικό τεστ. Αν κάποια λέξη βγει λάθος, ξανά το 3 για εκείνη.</div>
     <div><b>Γιατί δουλεύει:</b> χωρίζει τη λέξη σε κομμάτια, βλέπει πού είναι η «παγίδα», τη γράφει από μνήμης (όχι αντιγραφή), ελέγχει μόνη της, και επαναλαμβάνει με κενό χρόνου.</div>
   </section>
 </div>
 
 <script>
-const WORDS = [
+const ALL_WORDS = [
   { w:"book", gr:"βιβλίο", chunks:[["b",""],["oo","oo"],["k",""]],
     tip:"Μικρή λέξη με <b>δύο o</b> στη μέση, σαν δύο ματάκια που διαβάζουν: b-<b>oo</b>-k.",
     icon:'<svg viewBox="0 0 64 64"><path d="M8 14c8-3 16-3 24 2v38c-8-5-16-5-24-2z" fill="#1f9d6a"/><path d="M56 14c-8-3-16-3-24 2v38c8-5 16-5 24-2z" fill="#27b57b"/><path d="M12 18c6-2 12-2 18 1v30c-6-3-12-3-18-1z" fill="#fff"/><path d="M52 18c-6-2-12-2-18 1v30c6-3 12-3 18-1z" fill="#fff"/></svg>' },
@@ -117,6 +160,7 @@ const WORDS = [
   { w:"rubber", gr:"γόμα", chunks:[["rub","b"],["ber","b"]],
     tip:"<b>rub</b> = τρίβω, και η γόμα τρίβει το χαρτί! <b>rub</b> + <b>ber</b>, με <b>διπλό bb</b> στη μέση: ru<b>bb</b>er. Τελειώνει με <b>er</b>, όπως sharpen<b>er</b>.",
     icon:'<svg viewBox="0 0 64 64"><g transform="rotate(-20 32 32)"><rect x="10" y="22" width="44" height="20" rx="4" fill="#f28b9b"/><rect x="10" y="22" width="18" height="20" rx="4" fill="#2f6fde"/><rect x="24" y="22" width="4" height="20" fill="#2f6fde"/></g></svg>' },
+  // Lesson 2 starts here
   { w:"desk", gr:"θρανίο", chunks:[["d",""],["e","e"],["sk","sk"]],
     tip:"Τέσσερα γράμματα: <b>d-e-s-k</b>. Τελειώνει με <b>sk</b>, ακούγεται «ντεσκ». Στο <b>desk</b> κάθεσαι και γράφεις!",
     icon:'<svg viewBox="0 0 64 64"><rect x="6" y="20" width="52" height="8" rx="2" fill="#a0673a"/><rect x="10" y="28" width="6" height="26" fill="#7a4a26"/><rect x="48" y="28" width="6" height="26" fill="#7a4a26"/><rect x="34" y="28" width="14" height="12" fill="#8b5a30"/><rect x="38" y="33" width="6" height="2" rx="1" fill="#f1d3a8"/></svg>' },
@@ -131,10 +175,63 @@ const WORDS = [
     icon:'<svg viewBox="0 0 64 64"><path d="M22 16a10 10 0 0 1 20 0" fill="none" stroke="#1d2b3a" stroke-width="4"/><rect x="12" y="16" width="40" height="42" rx="8" fill="#d6453d"/><rect x="18" y="34" width="28" height="18" rx="4" fill="#a92f29"/><rect x="29" y="32" width="6" height="6" rx="1" fill="#ffcf3f"/></svg>' }
 ];
 
+const LESSON_START = ALL_WORDS.findIndex(x=>x.w==="desk");
+const LESSONS = [
+  { name:"Lesson 1", words:ALL_WORDS.slice(0,LESSON_START) },
+  { name:"Lesson 2", words:ALL_WORDS.slice(LESSON_START) }
+];
+const LSL = "clio-spell-lesson";
+let li = 1; try{ const v = localStorage.getItem(LSL); if(v==="0"||v==="1") li = +v }catch(e){}
+let WORDS = LESSONS[li].words;
+const NUM_GR = ["","μία","δύο","τρεις","τέσσερις","πέντε","έξι","επτά","οκτώ","εννέα","δέκα","έντεκα"];
+function drawLessons(){
+  document.getElementById("lessons").innerHTML = LESSONS.map((l,i)=>`<button class="tab" role="tab" aria-selected="${i===li}" onclick="pickLesson(${i})">${l.name} (${l.words.length})</button>`).join("");
+  const n = WORDS.length, t = NUM_GR[n]||n;
+  document.getElementById("intro").textContent = `${LESSONS[li].name}: ${t.charAt(0).toUpperCase()+t.slice(1)} λέξεις. Κάνε τα παιχνίδια 1 έως 5 με τη σειρά και τέλος το τελικό τεστ.`;
+}
+function pickLesson(i){ li=i; WORDS=LESSONS[li].words; try{ localStorage.setItem(LSL,String(i)) }catch(e){} drawLessons(); drawWords(); pick(gi); }
+
+const LSM = "clio-spell-medals";
+let ach = {}; try{ ach = JSON.parse(localStorage.getItem(LSM)||"{}") }catch(e){ ach = {} }
+let stats = ach._stats || { correct:0, tiles:0, dict:0, tests:0 };
+const allStars = ws => ws.every(x=>(score[x.w]||0)>=5);
+const MEDALS = [
+  { id:"first", i:"🌱", n:"Πρώτο βήμα", d:"Η πρώτη σωστή λέξη", ok:()=>stats.correct>=1 },
+  { id:"ten", i:"✏️", n:"Μολυβάκι", d:"10 σωστές λέξεις", ok:()=>stats.correct>=10 },
+  { id:"fifty", i:"📚", n:"Βιβλιοφάγος", d:"50 σωστές λέξεις", ok:()=>stats.correct>=50 },
+  { id:"tiles", i:"🧩", n:"Μάστορας γραμμάτων", d:"10 λέξεις με τα γράμματα (4)", ok:()=>stats.tiles>=10 },
+  { id:"dict", i:"🎧", n:"Καλό αυτί", d:"Μία υπαγόρευση χωρίς λάθος (5)", ok:()=>stats.dict>=1 },
+  { id:"l1stars", i:"⭐", n:"Αστέρι Lesson 1", d:"5 αστέρια σε όλες τις λέξεις του Lesson 1", ok:()=>allStars(LESSONS[0].words) },
+  { id:"l2stars", i:"🌟", n:"Αστέρι Lesson 2", d:"5 αστέρια σε όλες τις λέξεις του Lesson 2", ok:()=>allStars(LESSONS[1].words) },
+  { id:"l1test", i:"🥈", n:"Τέλειο Lesson 1", d:"Τελικό τεστ Lesson 1 χωρίς λάθος", ok:()=>!!ach.l1perfect },
+  { id:"l2test", i:"🥇", n:"Τέλειο Lesson 2", d:"Τελικό τεστ Lesson 2 χωρίς λάθος", ok:()=>!!ach.l2perfect },
+  { id:"champ", i:"🏆", n:"Πρωταθλήτρια", d:"Όλα τα μετάλλια!", ok:()=>MEDALS.filter(m=>m.id!=="champ").every(m=>ach[m.id]) }
+];
+const RANKS = [[0,"Μαθητευόμενη 🐣"],[2,"Εξερευνήτρια 🧭"],[4,"Ιππότισσα των λέξεων 🛡️"],[7,"Μάγισσα της ορθογραφίας 🪄"],[10,"Βασίλισσα των λέξεων 👑"]];
+function saveAch(){ ach._stats = stats; try{ localStorage.setItem(LSM, JSON.stringify(ach)) }catch(e){} }
+function toast(t){ const d=document.createElement("div"); d.className="toast pop"; d.textContent=t; document.body.appendChild(d); setTimeout(()=>d.remove(),3200); }
+function checkMedals(){
+  let fresh=[];
+  for(const m of MEDALS){ if(!ach[m.id] && m.ok()){ ach[m.id]=Date.now(); fresh.push(m); } }
+  if(MEDALS.every(m=>m.id==="champ"||ach[m.id]) && !ach.champ){ ach.champ=Date.now(); fresh.push(MEDALS.find(m=>m.id==="champ")); }
+  saveAch(); drawHero();
+  if(fresh.length){ toast("Νέο μετάλλιο: "+fresh.map(m=>m.i+" "+m.n).join(", ")+"!"); try{ confetti(60) }catch(e){} try{ say("New medal!") }catch(e){} }
+}
+function drawHero(){
+  const got = MEDALS.filter(m=>ach[m.id]).length;
+  const stars = ALL_WORDS.reduce((a,x)=>a+(score[x.w]||0),0);
+  document.getElementById("hsMedals").textContent = got+"/"+MEDALS.length;
+  document.getElementById("hsStars").textContent = stars+"/"+ALL_WORDS.length*5;
+  document.getElementById("hsTests").textContent = (ach.l1perfect?1:0)+(ach.l2perfect?1:0);
+  let r = RANKS[0][1]; for(const [n,t] of RANKS) if(got>=n) r=t;
+  document.getElementById("hsRank").textContent = "Βαθμός: "+r;
+  document.getElementById("medals").innerHTML = MEDALS.map(m=>`<div class="medal ${ach[m.id]?"earned":"locked"}"><div class="mi">${ach[m.id]?m.i:"🔒"}</div><div class="mn">${m.n}</div><div class="md">${m.d}</div></div>`).join("");
+}
+
 const LS = "clio-spell-v1";
 let score = {}; try{ score = JSON.parse(localStorage.getItem(LS)||"{}") }catch(e){ score = {} }
 function save(){ try{ localStorage.setItem(LS, JSON.stringify(score)) }catch(e){} }
-function bump(w,ok){ const s = score[w]||0; score[w] = ok ? Math.min(s+1,5) : Math.max(s-1,0); save(); drawWords(); }
+function bump(w,ok){ const s = score[w]||0; score[w] = ok ? Math.min(s+1,5) : Math.max(s-1,0); save(); drawWords(); if(ok) stats.correct++; checkMedals(); }
 
 function say(text, slow){
   try{
@@ -258,7 +355,7 @@ function takeTile(k){ built.push(pool.splice(k,1)[0]); drawTiles(); if(!pool.len
 function giveBack(k){ pool.push(built.splice(k,1)[0]); drawTiles(); document.getElementById("fb").textContent=""; document.getElementById("fb").className="fb"; }
 function checkTiles(){
   const x = WORDS[wi], got = built.map(t=>t.c).join(""), fb = document.getElementById("fb");
-  if(got===x.w){ fb.className="fb ok pop"; fb.textContent="Μπράβο! Σωστή σειρά ⭐"; bump(x.w,true); say(x.w); }
+  if(got===x.w){ fb.className="fb ok pop"; fb.textContent="Μπράβο! Σωστή σειρά ⭐"; stats.tiles++; bump(x.w,true); say(x.w); }
   else { fb.className="fb no"; fb.innerHTML=`Όχι ακόμα. Πάτα ένα γράμμα πάνω για να το γυρίσεις πίσω.<div class="diff">${diffHTML(x.w,got)}</div>`; }
 }
 
@@ -271,7 +368,7 @@ function dictStep(){
     stage().innerHTML = `<h2>Τέλος υπαγόρευσης</h2><div class="big pop">${dright} / ${dq.length}</div>
       <p style="text-align:center">${dright===dq.length?"Είσαι έτοιμη για αύριο! 🎉":"Κάνε το «Κοίτα-Κρύψε-Γράψε» για τη λέξη που ξέφυγε και ξαναδοκίμασε."}</p>
       <div class="row"><button class="b" onclick="dictationGame()">Ξανά υπαγόρευση</button></div>`;
-    if(dright===dq.length) say("Excellent! You are ready.");
+    if(dright===dq.length){ say("Excellent! You are ready."); stats.dict++; checkMedals(); }
     return;
   }
   const x = dq[dpos];
@@ -323,6 +420,7 @@ function finalResult(){
         : `<div class="diff" style="font-size:22px">${diffHTML(x.w,fans[i])}</div><div class="gr">έγραψες: ${fans[i]||"(κενό)"}</div>`}</div></div>`;
   }).join("");
   const perfect = right===fq.length;
+  if(perfect){ stats.tests++; ach[li===0?"l1perfect":"l2perfect"]=Date.now(); checkMedals(); }
   stage().innerHTML = `
     <h2>Αποτέλεσμα</h2>
     <div class="scorebox pop"><div class="score">${right}<span>/${fq.length}</span></div><div class="stars big-stars">${"★".repeat(right)}${"☆".repeat(fq.length-right)}</div><div class="gr">${Math.round(100*right/fq.length)}%</div></div>
@@ -351,7 +449,7 @@ function confetti(count){
 }
 
 try{ speechSynthesis.getVoices(); speechSynthesis.onvoiceschanged=()=>{}; }catch(e){}
-drawWords(); drawTabs(); GAMES[0].run();
+drawLessons(); drawWords(); drawHero(); drawTabs(); GAMES[0].run();
 </script>
 
 </body></html>
